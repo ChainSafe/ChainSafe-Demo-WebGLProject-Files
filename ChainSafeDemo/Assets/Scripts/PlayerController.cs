@@ -122,8 +122,15 @@ public class PlayerController : MonoBehaviour
 
         if (hit.transform.tag == "Voucher")
         {
+            if (GlobalManager.GetComponent<Global>().globalCoins > 0)
+            {
             FindObjectOfType<AudioManager>().Play("Pop");
             VoucherMenu.SetActive(true);
+            }
+            else
+            {
+                Debug.Log("Get More Coins!");
+            }
         }
 
         if (hit.transform.tag == "Marketplace")
@@ -133,56 +140,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    // menu close buttons, usually you would subtract a coin once the blockchain call has suceeded, I've just done it here to show you how in 1 script
-    public void CloseMintNFTMenu()
-    {
-        FindObjectOfType<AudioManager>().Play("Pop");
-        if (GlobalManager.GetComponent<Global>().globalCoins > 0){
-        GlobalManager.GetComponent<Global>().globalCoins -= 1;
-        CoinsText.text = "Coins: " + GlobalManager.GetComponent<Global>().globalCoins.ToString();
-        }
-        MintNFTMenu.SetActive(false);
-    }
-
-    public void CloseVerifyMenu()
-    {
-        FindObjectOfType<AudioManager>().Play("Pop");
-        if (GlobalManager.GetComponent<Global>().globalCoins > 0){
-        GlobalManager.GetComponent<Global>().globalCoins -= 1;
-        CoinsText.text = "Coins: " + GlobalManager.GetComponent<Global>().globalCoins.ToString();
-        }
-        VerifyMenu.SetActive(false);
-    }
-
-    public void CloseSignMenu()
-    {
-        FindObjectOfType<AudioManager>().Play("Pop");
-        if (GlobalManager.GetComponent<Global>().globalCoins > 0){
-        GlobalManager.GetComponent<Global>().globalCoins -= 1;
-        CoinsText.text = "Coins: " + GlobalManager.GetComponent<Global>().globalCoins.ToString();
-        }
-        SignMenu.SetActive(false);
-    }
-
-    public void CloseTransferMenu()
-    {
-        FindObjectOfType<AudioManager>().Play("Pop");
-        if (GlobalManager.GetComponent<Global>().globalCoins > 0){
-        GlobalManager.GetComponent<Global>().globalCoins -= 1;
-        CoinsText.text = "Coins: " + GlobalManager.GetComponent<Global>().globalCoins.ToString();
-        }
-        TransferMenu.SetActive(false);
-    }
-
-    public void CloseContractMenu()
-    {
-        FindObjectOfType<AudioManager>().Play("Pop");
-        if (GlobalManager.GetComponent<Global>().globalCoins > 0){
-        GlobalManager.GetComponent<Global>().globalCoins -= 1;
-        CoinsText.text = "Coins: " + GlobalManager.GetComponent<Global>().globalCoins.ToString();
-        }
-        ContractMenu.SetActive(false);
-    }
+    // menu close buttons, usually you would subtract a coin once the blockchain call has suceeded, I've just done it here to show you how in the voucher script
 
     public void CloseVoucherMenu()
     {
@@ -192,6 +150,41 @@ public class PlayerController : MonoBehaviour
         CoinsText.text = "Coins: " + GlobalManager.GetComponent<Global>().globalCoins.ToString();
         }
         VoucherMenu.SetActive(false);
+    }
+
+    public void CloseMintNFTMenu()
+    {
+        FindObjectOfType<AudioManager>().Play("Pop");
+        CoinsText.text = "Coins: " + GlobalManager.GetComponent<Global>().globalCoins.ToString();
+        MintNFTMenu.SetActive(false);
+    }
+
+    public void CloseVerifyMenu()
+    {
+        FindObjectOfType<AudioManager>().Play("Pop");
+        CoinsText.text = "Coins: " + GlobalManager.GetComponent<Global>().globalCoins.ToString();
+        VerifyMenu.SetActive(false);
+    }
+
+    public void CloseSignMenu()
+    {
+        FindObjectOfType<AudioManager>().Play("Pop");
+        CoinsText.text = "Coins: " + GlobalManager.GetComponent<Global>().globalCoins.ToString();
+        SignMenu.SetActive(false);
+    }
+
+    public void CloseTransferMenu()
+    {
+        FindObjectOfType<AudioManager>().Play("Pop");
+        CoinsText.text = "Coins: " + GlobalManager.GetComponent<Global>().globalCoins.ToString();
+        TransferMenu.SetActive(false);
+    }
+
+    public void CloseContractMenu()
+    {
+        FindObjectOfType<AudioManager>().Play("Pop");
+        CoinsText.text = "Coins: " + GlobalManager.GetComponent<Global>().globalCoins.ToString();
+        ContractMenu.SetActive(false);
     }
 
     public void CloseMarketplaceMenu()

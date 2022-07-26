@@ -733,7 +733,7 @@ RectTransform:
   m_GameObject: {fileID: 1420901165}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.7102007, y: 1.7102007, z: 1.7102007}
+  m_LocalScale: {x: 1.1900797, y: 1.1900797, z: 1.1900797}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 933823407}
@@ -741,7 +741,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: -12, y: 91}
+  m_AnchoredPosition: {x: 34.5, y: 104.2}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0, y: 0}
 --- !u!114 &1420901167
@@ -1127,7 +1127,7 @@ MonoBehaviour:
     loop: 1
   - name: Cluck
     clip: {fileID: 8300000, guid: e637ad5dec01f6b498656f8265f969e6, type: 3}
-    volume: 0.12
+    volume: 0.11
     pitch: 1
     source: {fileID: 0}
     loop: 0
@@ -1389,17 +1389,17 @@ RectTransform:
   m_GameObject: {fileID: 1986177027}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2.145728, y: 1.5882517, z: 1.5882517}
+  m_LocalScale: {x: 1.5279685, y: 1.4300035, z: 1.4300035}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 933823407}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 445, y: 91.6}
+  m_AnchorMin: {x: 1, y: 0.5}
+  m_AnchorMax: {x: 1, y: 0.5}
+  m_AnchoredPosition: {x: -34.5, y: -32.4}
   m_SizeDelta: {x: 100, y: 100}
-  m_Pivot: {x: 0, y: 0}
+  m_Pivot: {x: 1, y: 0.5}
 --- !u!114 &1986177029
 MonoBehaviour:
   m_ObjectHideFlags: 0

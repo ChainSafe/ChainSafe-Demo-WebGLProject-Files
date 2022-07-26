@@ -18,6 +18,11 @@ public class WebLogin : MonoBehaviour
     private int expirationTime;
     private string account; 
 
+    public void Awake()
+    {
+        PlayerPrefs.SetString("Account", "");
+    }
+
     public void OnLogin()
     {
         Web3Connect();

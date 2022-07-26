@@ -45,6 +45,8 @@ public class MintWebGL1155 : MonoBehaviour
         {   
             string response = await Web3GL.SendTransactionData(nftResponse.tx.to, nftResponse.tx.value, nftResponse.tx.gasPrice,nftResponse.tx.gasLimit, nftResponse.tx.data);
             print("Response: " + response);
+            print(nftResponse.tx);
+            PlayerPrefs.SetString("WebGLVoucher1155", "");
         } catch (Exception e) {
             Debug.LogException(e, this);
         }

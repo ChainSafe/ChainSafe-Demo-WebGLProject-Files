@@ -841,3 +841,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d46b18a990b99b744aef3decf2aea93a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  IPFSImageHolder: {fileID: 0}
+  IPFSImage: {fileID: 0}
