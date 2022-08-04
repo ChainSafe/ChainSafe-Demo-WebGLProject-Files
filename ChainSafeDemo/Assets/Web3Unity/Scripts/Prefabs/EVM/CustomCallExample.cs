@@ -9,11 +9,11 @@ public class CustomCallExample : MonoBehaviour
     // set chain: ethereum, moonbeam, polygon etc
     string chain = "ethereum";
     // set network mainnet, testnet
-    string network = "rinkeby";
+    string network = "goerli";
     // abi in json format
     string abi = "[ { \"inputs\": [ { \"internalType\": \"uint8\", \"name\": \"_myArg\", \"type\": \"uint8\" } ], \"name\": \"addTotal\", \"outputs\": [], \"stateMutability\": \"nonpayable\", \"type\": \"function\" }, { \"inputs\": [], \"name\": \"myTotal\", \"outputs\": [ { \"internalType\": \"uint256\", \"name\": \"\", \"type\": \"uint256\" } ], \"stateMutability\": \"view\", \"type\": \"function\" } ]";
     // address of contract
-    string contract = "0x7286Cf0F6E80014ea75Dbc25F545A3be90F4904F";
+    string contract = "0x741C3F3146304Aaf5200317cbEc0265aB728FE07";
 
     /*
         //Solidity Contract
