@@ -18,6 +18,7 @@ TagManager:
   - LeftCarWall
   - RightCarWall
   - Global
+  - VoucherMintNFT
   layers:
   - Default
   - TransparentFX
