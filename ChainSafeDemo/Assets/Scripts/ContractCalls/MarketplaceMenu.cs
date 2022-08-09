@@ -6,6 +6,6 @@ public class MarketplaceMenu : MonoBehaviour
 {
     public void OpenMarketplace()
     {
-        Application.OpenURL("https://marketplace-ui.onrender.com/");
+        Application.OpenURL("https://marketplace.chainsafe.io/");
     }
 }
