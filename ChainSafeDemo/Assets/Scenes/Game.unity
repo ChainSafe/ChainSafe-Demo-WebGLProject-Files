@@ -17564,7 +17564,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1325293010}
         m_TargetAssemblyTypeName: VoucherMenu, Assembly-CSharp
-        m_MethodName: Get721VoucherButton
+        m_MethodName: Get1155VoucherButton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -22895,7 +22895,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: MINT 721
+  m_Text: MINT 1155
 --- !u!222 &1689040902
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -23117,7 +23117,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: MINT 721
+  m_Text: MINT 1155
 --- !u!222 &1701632157
 CanvasRenderer:
   m_ObjectHideFlags: 0

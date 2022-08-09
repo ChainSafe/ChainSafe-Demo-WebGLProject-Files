@@ -8,7 +8,7 @@ using UnityEngine.Networking; // needed for web requests
 #if UNITY_WEBGL
 public class VoucherMenu : MonoBehaviour
 {
-    // This script has been moved from the GetVoucherWebGL721.cs example in the Minter scripts folder to show you how to make additional changes
+    // This script has been moved from the GetVoucherWebGL1155.cs example in the Minter scripts folder to show you how to make additional changes
     public GameObject SuccessPopup;
     public GameObject IPFSImageHolder;
     public GameObject IPFSImage;
@@ -16,20 +16,23 @@ public class VoucherMenu : MonoBehaviour
     string metadataUri;
     string downloadURI;
 
-    public async void Get721VoucherButton()
+    public async void Get1155VoucherButton()
     {
-        var voucherResponse721 = await EVM.Get721Voucher();
-        Debug.Log("Voucher Response 721 Signature : " + voucherResponse721.signature);
-        Debug.Log("Voucher Response 721 Uri : " + voucherResponse721.uri);
-        Debug.Log("Voucher Response 721 Signer : " + voucherResponse721.signer);
-        Debug.Log("Voucher Response 721 Min Price : " + voucherResponse721.minPrice);
-        // saves the voucher to player prefs, you can change this if you like to fit your system
-        PlayerPrefs.SetString("WebGLVoucher721Sig", voucherResponse721.signature);
-        PlayerPrefs.SetString("WebGLVoucher721URI", voucherResponse721.uri);
-        PlayerPrefs.SetString("WebGLVoucher721Signer", voucherResponse721.signer);
-        PlayerPrefs.SetString("WebGLVoucher721MinPrice", voucherResponse721.minPrice.ToString());
+        var voucherResponse1155 = await EVM.Get1155Voucher();
+        Debug.Log("Voucher Response 1155 Signature: " + voucherResponse1155.signature);
+        Debug.Log("Voucher Response 1155 Min Price: " + voucherResponse1155.minPrice);
+        Debug.Log("Voucher Response 1155 Token ID: " + voucherResponse1155.tokenId);
+        Debug.Log("Voucher Response 1155 Nonce: " + voucherResponse1155.nonce);
+        Debug.Log("Voucher Response 1155 Signer: " + voucherResponse1155.signer);
+        // saves the voucher to player prefs, you can change this if you like to fit your system 
+        PlayerPrefs.SetString("WebGLVoucher1155Sig", voucherResponse1155.signature);
+        PlayerPrefs.SetString("WebGLVoucher1155TokenID", voucherResponse1155.tokenId);
+        PlayerPrefs.SetString("WebGLVoucher1155Signer", voucherResponse1155.signer);
+        PlayerPrefs.SetString("WebGLVoucher1155Nonce", voucherResponse1155.nonce.ToString());
+        PlayerPrefs.SetString("WebGLVoucher1155MinPrice", voucherResponse1155.minPrice.ToString());
+        string newURL = voucherResponse1155.tokenId.Replace("0x","f");
         // initialize gateway and uri
-        metadataUri = gateway + voucherResponse721.uri;
+        metadataUri = gateway + newURL;
         // start json web request
         StartCoroutine(GetURIData());
     }
