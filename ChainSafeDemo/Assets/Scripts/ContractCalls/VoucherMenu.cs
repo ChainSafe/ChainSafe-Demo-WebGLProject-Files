@@ -12,7 +12,7 @@ public class VoucherMenu : MonoBehaviour
     public GameObject SuccessPopup;
     public GameObject IPFSImageHolder;
     public GameObject IPFSImage;
-    string gateway = "https://ipfs.chainsafe.io/ipfs/";
+    string gateway = "https://game-api-stg.chainsafe.io/ipfs/";
     string metadataUri;
     string downloadURI;
 

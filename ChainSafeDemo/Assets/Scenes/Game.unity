@@ -29791,7 +29791,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 5028427087537608020}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 10f819bf154a99340993b5add0f250c2, type: 3}
+  m_Script: {fileID: 11500000, guid: cb41a38280b6f2044986a2c91e84d360, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   MintNFTMenu: {fileID: 165536234}
@@ -29854,7 +29854,7 @@ Animator:
   m_GameObject: {fileID: 5028427087537608020}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: d623cd35a78380d4eb0457c4e483abed, type: 3}
-  m_Controller: {fileID: 9100000, guid: cc61f18065cf3f6469267fbf8f5e4221, type: 2}
+  m_Controller: {fileID: 9100000, guid: 0d06ec35ba4c9fc4ea0948b401461d2a, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
