@@ -12,7 +12,7 @@ public class CarMove : MonoBehaviour
     
     void Awake()
     {
-        // sets triggers to change direction
+        // sets triggers to change direction when hit
         LeftWall = GameObject.FindGameObjectWithTag("LeftCarWall");
         RightWall = GameObject.FindGameObjectWithTag("RightCarWall");
     }
