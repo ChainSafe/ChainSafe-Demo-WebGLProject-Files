@@ -6,7 +6,7 @@ public class CoinRotate : MonoBehaviour
 {
     void Update()
     {
-        // rotates object, you can change the numbers here to increase rotation speed
+        // rotates object
         gameObject.transform.Rotate(50 * Time.deltaTime, 0, 0);
     }
 }

@@ -34,6 +34,7 @@ public class TransferMenu: MonoBehaviour
             string response = await Web3GL.SendContract(method, abi, contract, args, value, gasLimit, gasPrice);
             Debug.Log(response);
             responseText.text = response;
+            SuccessPopup.SetActive(true);
         } catch (Exception e) {
             Debug.LogException(e, this);
         }

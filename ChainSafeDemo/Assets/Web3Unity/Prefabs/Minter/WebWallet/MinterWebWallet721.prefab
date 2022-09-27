@@ -30,7 +30,6 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8353017115511909230}
   m_Father: {fileID: 8078816137222986217}
@@ -125,7 +124,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 8493851505887001244}
         m_TargetAssemblyTypeName: MintWeb3Wallet721, Assembly-CSharp
-        m_MethodName: MintNFT721
+        m_MethodName: MintNft721
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -151,7 +150,7 @@ MonoBehaviour:
   network: goerli
   account: 
   to: 0x7259E32e35cf880aEACfbD412E7F4Baa8606e04c
-  cid721: QmXjWjjMU8r39UCEZ8483aNedwNRFRLvvV9kwq1GpCgthj
+  cid721: f01559ae4021a47e26bc773587278f62a833f2a6117411afbc5a7855661936d1c
   chainId: 5
   type721: 721
 --- !u!1 &3131669594263551518
@@ -183,7 +182,6 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0, y: 0, z: 0}
-  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 9179600180482286726}
   m_Father: {fileID: 508347597624648835}
@@ -281,7 +279,6 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8078816137222986217}
   - {fileID: 4336457643474341735}
@@ -316,7 +313,6 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 9179600180482286726}
   m_RootOrder: 0
@@ -396,7 +392,6 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 508347597624648835}
   m_RootOrder: 1
@@ -428,7 +423,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f231c4fb786f3946a6b90b886c48677, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_SendPointerHoverToParent: 1
   m_HorizontalAxis: Horizontal
   m_VerticalAxis: Vertical
   m_SubmitButton: Submit

@@ -18,7 +18,7 @@ public class Web3PrivateKeySendTransactionExample : MonoBehaviour
         // account to send to
         string to = "0x428066dd8A212104Bc9240dCe3cdeA3D3A0f7979";
         // value in wei
-        string value = "0";
+        string value = "123";
         // optional rpc url
         string rpc = "";
 

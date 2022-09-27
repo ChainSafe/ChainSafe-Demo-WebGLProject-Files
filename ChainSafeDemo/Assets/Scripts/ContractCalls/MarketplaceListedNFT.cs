@@ -24,8 +24,8 @@ public class MarketplaceListedNFT : MonoBehaviour
     public Text itemId;
     private string _itemPrice = "";
     private string _tokenType = "";
-
     private string _itemID = "";
+    private int NFTNumber = 0;
 
 
     public void Awake()
@@ -44,15 +44,15 @@ public class MarketplaceListedNFT : MonoBehaviour
     async void Start()
     {
         List<GetNftListModel.Response> response = await EVM.GetNftMarket(chain, network);
-        price.text = response[0].price;
-        seller.text = response[0].seller;
-        if (response[0].uri.StartsWith("ipfs://"))
+        price.text = response[NFTNumber].price;
+        seller.text = response[NFTNumber].seller;
+        if (response[NFTNumber].uri.StartsWith("ipfs://"))
         {
-            response[0].uri = response[0].uri.Replace("ipfs://", "https://ipfs.io/ipfs/");
-            Debug.Log("Response URI" + response[0].uri);
+            response[NFTNumber].uri = response[NFTNumber].uri.Replace("ipfs://", "https://ipfs.io/ipfs/");
+            Debug.Log("Response URI" + response[NFTNumber].uri);
         }
 
-        UnityWebRequest webRequest = UnityWebRequest.Get(response[0].uri);
+        UnityWebRequest webRequest = UnityWebRequest.Get(response[NFTNumber].uri);
         await webRequest.SendWebRequest();
         RootGetNFT data =
             JsonConvert.DeserializeObject<RootGetNFT>(
@@ -76,13 +76,104 @@ public class MarketplaceListedNFT : MonoBehaviour
                 }
             }
         }
-        listPercentage.text = response[0].listedPercentage;
-        contractAddr.text = response[0].nftContract;
-        itemId.text = response[0].itemId;
-        _itemID = response[0].itemId;
-        _itemPrice = response[0].price;
-        _tokenType = response[0].tokenType;
-        tokenId.text = response[0].tokenId;
+        listPercentage.text = response[NFTNumber].listedPercentage;
+        contractAddr.text = response[NFTNumber].nftContract;
+        itemId.text = response[NFTNumber].itemId;
+        _itemID = response[NFTNumber].itemId;
+        _itemPrice = response[NFTNumber].price;
+        _tokenType = response[NFTNumber].tokenType;
+        tokenId.text = response[NFTNumber].tokenId;
+    }
+
+    async public void NextNFT()
+    {
+        NFTNumber++;
+        List<GetNftListModel.Response> response = await EVM.GetNftMarket(chain, network);
+        price.text = response[NFTNumber].price;
+        seller.text = response[NFTNumber].seller;
+        if (response[NFTNumber].uri.StartsWith("ipfs://"))
+        {
+            response[NFTNumber].uri = response[NFTNumber].uri.Replace("ipfs://", "https://ipfs.io/ipfs/");
+            Debug.Log("Response URI" + response[NFTNumber].uri);
+        }
+
+        UnityWebRequest webRequest = UnityWebRequest.Get(response[NFTNumber].uri);
+        await webRequest.SendWebRequest();
+        RootGetNFT data =
+            JsonConvert.DeserializeObject<RootGetNFT>(
+                System.Text.Encoding.UTF8.GetString(webRequest.downloadHandler.data)); 
+        description.text = data.description;
+        // parse json to get image uri
+        string imageUri = data.image;
+        if (imageUri.StartsWith("ipfs://"))
+        {
+            imageUri = imageUri.Replace("ipfs://", "https://ipfs.io/ipfs/");
+            StartCoroutine(DownloadImage(imageUri));
+        }
+
+        if (data.properties != null)
+        {
+            foreach (var prop in data.properties.additionalFiles)
+            {
+                if (prop.StartsWith("ipfs://"))
+                {
+                    var additionalURi = prop.Replace("ipfs://", "https://ipfs.io/ipfs/");
+                }
+            }
+        }
+        listPercentage.text = response[NFTNumber].listedPercentage;
+        contractAddr.text = response[NFTNumber].nftContract;
+        itemId.text = response[NFTNumber].itemId;
+        _itemID = response[NFTNumber].itemId;
+        _itemPrice = response[NFTNumber].price;
+        _tokenType = response[NFTNumber].tokenType;
+        tokenId.text = response[NFTNumber].tokenId;
+    }
+
+    async public void PreviousNFT()
+    {
+        if (NFTNumber != 0){
+        NFTNumber--;}
+        List<GetNftListModel.Response> response = await EVM.GetNftMarket(chain, network);
+        price.text = response[NFTNumber].price;
+        seller.text = response[NFTNumber].seller;
+        if (response[NFTNumber].uri.StartsWith("ipfs://"))
+        {
+            response[NFTNumber].uri = response[NFTNumber].uri.Replace("ipfs://", "https://ipfs.io/ipfs/");
+            Debug.Log("Response URI" + response[NFTNumber].uri);
+        }
+
+        UnityWebRequest webRequest = UnityWebRequest.Get(response[NFTNumber].uri);
+        await webRequest.SendWebRequest();
+        RootGetNFT data =
+            JsonConvert.DeserializeObject<RootGetNFT>(
+                System.Text.Encoding.UTF8.GetString(webRequest.downloadHandler.data)); 
+        description.text = data.description;
+        // parse json to get image uri
+        string imageUri = data.image;
+        if (imageUri.StartsWith("ipfs://"))
+        {
+            imageUri = imageUri.Replace("ipfs://", "https://ipfs.io/ipfs/");
+            StartCoroutine(DownloadImage(imageUri));
+        }
+
+        if (data.properties != null)
+        {
+            foreach (var prop in data.properties.additionalFiles)
+            {
+                if (prop.StartsWith("ipfs://"))
+                {
+                    var additionalURi = prop.Replace("ipfs://", "https://ipfs.io/ipfs/");
+                }
+            }
+        }
+        listPercentage.text = response[NFTNumber].listedPercentage;
+        contractAddr.text = response[NFTNumber].nftContract;
+        itemId.text = response[NFTNumber].itemId;
+        _itemID = response[NFTNumber].itemId;
+        _itemPrice = response[NFTNumber].price;
+        _tokenType = response[NFTNumber].tokenType;
+        tokenId.text = response[NFTNumber].tokenId;
     }
 
     // ReSharper disable Unity.PerformanceAnalysis
