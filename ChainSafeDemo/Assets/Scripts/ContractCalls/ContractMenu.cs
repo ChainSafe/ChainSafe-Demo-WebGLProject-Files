@@ -55,6 +55,7 @@ public class ContractMenu : MonoBehaviour
         string response = await Web3GL.SendContract(method, abi, contract, args, "0", "", "");
         // display response in game
         print("Please check the contract variable again in a few seconds once the chain has processed the request!");
+        await new WaitForSeconds(8);
         responseText.text = "Contract Variable Total: " + response;
         SuccessPopup.SetActive(true);
     }
