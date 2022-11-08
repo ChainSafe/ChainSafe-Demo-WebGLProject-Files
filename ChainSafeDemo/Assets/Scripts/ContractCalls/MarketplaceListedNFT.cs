@@ -14,7 +14,7 @@ public class MarketplaceListedNFT : MonoBehaviour
     // This script has been moved from the GetListedNFTWebGL.cs example in the Minter scripts folder to show you how to make additional changes
     private string chain = "ethereum";
     public Renderer textureObject;
-    private string network = "goerli";
+    private string network = "moonbeam";
     public Text price;
     public Text seller;
     public Text description;

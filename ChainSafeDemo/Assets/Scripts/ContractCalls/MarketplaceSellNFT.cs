@@ -14,7 +14,7 @@ public class MarketplaceSellNFT : MonoBehaviour
     {
         // This script has been moved from the ListNFTWebGL.cs example in the Minter scripts folder to show you how to make additional changes
         private string chain = "ethereum";
-        private string network = "goerli";
+        private string network = "moonbeam";
         private string _itemPrice = "0.001";
         private string _tokenType = "";
         private string _itemID = "";

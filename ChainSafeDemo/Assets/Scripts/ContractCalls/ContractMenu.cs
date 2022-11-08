@@ -9,7 +9,7 @@ public class ContractMenu : MonoBehaviour
     // This script has been moved from the CustomCallExample.cs example in the EVM scripts folder to show you how to make additional changes
     string chain = "ethereum";
     // set network mainnet, testnet
-    string network = "goerli";
+    string network = "moonbeam";
     // abi in json format
     string abi = "[ { \"inputs\": [ { \"internalType\": \"uint8\", \"name\": \"_myArg\", \"type\": \"uint8\" } ], \"name\": \"addTotal\", \"outputs\": [], \"stateMutability\": \"nonpayable\", \"type\": \"function\" }, { \"inputs\": [], \"name\": \"myTotal\", \"outputs\": [ { \"internalType\": \"uint256\", \"name\": \"\", \"type\": \"uint256\" } ], \"stateMutability\": \"view\", \"type\": \"function\" } ]";
     // address of contract

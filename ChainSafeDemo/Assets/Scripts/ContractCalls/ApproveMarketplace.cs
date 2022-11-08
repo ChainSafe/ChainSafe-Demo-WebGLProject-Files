@@ -9,7 +9,7 @@ public class ApproveMarketplace : MonoBehaviour
 {
     // Start is called before the first frame update
     public string chain = "ethereum";
-    public string network = "goerli";
+    public string network = "moonbeam";
     public string account;
     public string tokenType = "1155";
 
