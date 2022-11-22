@@ -37,7 +37,7 @@ public class ContractMenu : MonoBehaviour
         // array of arguments for contract
         string args = "[]";
         // connects to user's browser wallet to call a transaction
-        string response = await EVM.Call(chain, network, contract, abi, method, args);
+        string response = await EVM.Call(chain, network, contract, abi, method, args, "https://goerli.infura.io/v3");
         // display response in game
         print("Contract Variable Total: " + response);
         responseText.text = "Contract Variable Total: " + response;
