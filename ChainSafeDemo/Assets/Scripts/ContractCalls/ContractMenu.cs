@@ -14,6 +14,8 @@ public class ContractMenu : MonoBehaviour
     string abi = "[ { \"inputs\": [ { \"internalType\": \"uint8\", \"name\": \"_myArg\", \"type\": \"uint8\" } ], \"name\": \"addTotal\", \"outputs\": [], \"stateMutability\": \"nonpayable\", \"type\": \"function\" }, { \"inputs\": [], \"name\": \"myTotal\", \"outputs\": [ { \"internalType\": \"uint256\", \"name\": \"\", \"type\": \"uint256\" } ], \"stateMutability\": \"view\", \"type\": \"function\" } ]";
     // address of contract
     string contract = "0x741C3F3146304Aaf5200317cbEc0265aB728FE07";
+    // testnet rpc from chainlist.org
+    string rpc = "https://goerli.infura.io/v3/9aa3d95b3bc440fa88ea12eaa4456161";
     public GameObject SuccessPopup;
     public Text responseText;
 
@@ -37,7 +39,7 @@ public class ContractMenu : MonoBehaviour
         // array of arguments for contract
         string args = "[]";
         // connects to user's browser wallet to call a transaction
-        string response = await EVM.Call(chain, network, contract, abi, method, args, "https://goerli.infura.io/v3");
+        string response = await EVM.Call(chain, network, contract, abi, method, args, rpc);
         // display response in game
         print("Contract Variable Total: " + response);
         responseText.text = "Contract Variable Total: " + response;
