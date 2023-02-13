@@ -1,12 +1,13 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using Models;
 using Newtonsoft.Json;
 using UnityEditor;
-using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.UI;
+using Web3Unity.Scripts.Library.ETHEREUEM.Connect;
+using System;
+using UnityEngine;
 
 
 #if UNITY_WEBGL

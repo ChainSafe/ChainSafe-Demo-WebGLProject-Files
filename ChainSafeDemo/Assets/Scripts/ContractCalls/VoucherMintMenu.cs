@@ -1,6 +1,7 @@
 using System;
 using Models;
 using UnityEngine.UI; // needed when accessing text elements
+using Web3Unity.Scripts.Library.ETHEREUEM.Connect;
 using UnityEngine;
 
 #if UNITY_WEBGL
@@ -9,8 +10,8 @@ public class VoucherMintMenu : MonoBehaviour
     // This script has been moved from the MintWebGL721.cs example in the Minter scripts folder to show you how to make additional changes
     public GameObject SuccessPopup;
     public Text responseText;
-    public GameObject Player;
     // used for speed bonus on successful mint
+    public GameObject Player;
     public GameObject SpeedClouds;
     // set chain: ethereum, moonbeam, polygon etc
     public string chain = "ethereum";
@@ -39,10 +40,10 @@ public class VoucherMintMenu : MonoBehaviour
         // connects to user's browser wallet to call a transaction
         RedeemVoucherTxModel.Response voucherResponse = await EVM.CreateRedeemTransaction(chain, network, voucherArgs, type, nftAddress, voucherResponse1155.receiver);
         string response = await Web3GL.SendTransactionData(voucherResponse.tx.to, voucherResponse.tx.value.ToString(), voucherResponse.tx.gasPrice, voucherResponse.tx.gasLimit, voucherResponse.tx.data);
-        print("Response: " + response);
         SpeedClouds.SetActive(true);
         Player.GetComponent<PlayerController>().speed = 35;
-        responseText.text = "NFT Minted";
+        SuccessPopup.SetActive(true);
+        print("Response: " + response);
         }
         catch (Exception e)
         {
