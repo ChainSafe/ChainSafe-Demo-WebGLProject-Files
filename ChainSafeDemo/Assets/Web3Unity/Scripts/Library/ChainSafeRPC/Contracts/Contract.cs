@@ -1,8 +1,10 @@
 using System;
 using System.Threading.Tasks;
+using GameData;
 using Nethereum.Hex.HexTypes;
 using Newtonsoft.Json;
 using UnityEngine;
+using Web3Unity.Scripts.Library.ETHEREUEM.WebGL;
 using Web3Unity.Scripts.Library.Ethers.Contracts.Builders;
 using Web3Unity.Scripts.Library.Ethers.Providers;
 using Web3Unity.Scripts.Library.Ethers.Signers;
@@ -108,6 +110,7 @@ namespace Web3Unity.Scripts.Library.Ethers.Contracts
             txReq.Data = function.GetData(parameters);
 
             var result = await _provider.Call(txReq);
+#if UNITY_EDITOR_WIN || UNITY_EDITOR_OSX || UNITY_IOS || UNITY_ANDROID
             var data = new
             {
                 Client = "Desktop/Mobile",
@@ -117,10 +120,25 @@ namespace Web3Unity.Scripts.Library.Ethers.Contracts
                 To = _address,
                 TransactionResult = result,
                 Data = JsonConvert.SerializeObject(parameters),
-                Player = Web3Wallet.Web3Wallet.Sha3(PlayerPrefs.GetString("Account"))
+                Player = Web3Wallet.Web3Wallet.Sha3(PlayerPrefs.GetString("Account") + PlayerPrefs.GetString("ProjectID"))
             };
+            Logging.SendGameData(data);
+#endif
 
-            GameData.Logging.SendGameData(data);
+#if UNITY_WEBGL
+            var dataWebGL = new
+            {
+                Client = "WebGL",
+                Version = "v2",
+                ProjectID = PlayerPrefs.GetString("ProjectID"),
+                Method = method,
+                To = _address,
+                TransactionResult = result,
+                Data = JsonConvert.SerializeObject(parameters),
+                Player = Web3Wallet.Web3Wallet.Sha3(PlayerPrefs.GetString("Account") + PlayerPrefs.GetString("ProjectID"))
+            };
+            await GameLogger.Log("", "", dataWebGL);
+#endif
             var output = function.DecodeOutput(result);
             var array = new object[output.Count];
             for (var i = 0; i < output.Count; i++)
@@ -185,7 +203,6 @@ namespace Web3Unity.Scripts.Library.Ethers.Contracts
             {
                 throw new Exception("contract address is not set");
             }
-
             if (_provider == null)
             {
                 throw new Exception("provider or signer is not set");
@@ -213,15 +230,30 @@ namespace Web3Unity.Scripts.Library.Ethers.Contracts
         public string Calldata(string method, object[] parameters = null)
         {
             parameters ??= Array.Empty<object>();
+#if UNITY_EDITOR_WIN || UNITY_EDITOR_OSX || UNITY_IOS || UNITY_ANDROID
             var data = new
             {
                 Client = "Desktop/Mobile",
                 Version = "v2",
                 ProjectID = PlayerPrefs.GetString("ProjectID"),
+                Player = Web3Wallet.Web3Wallet.Sha3(PlayerPrefs.GetString("Account") + PlayerPrefs.GetString("ProjectID")),
                 Method = method,
                 Params = parameters
             };
-            GameData.Logging.SendGameData(data);
+            Logging.SendGameData(data);
+#endif
+#if UNITY_WEBGL
+            var dataWebGL = new
+            {
+                Client = "WebGL",
+                Version = "v2",
+                ProjectID = PlayerPrefs.GetString("ProjectID"),
+                Player = Web3Wallet.Web3Wallet.Sha3(PlayerPrefs.GetString("Account") + PlayerPrefs.GetString("ProjectID")),
+                Method = method,
+                Params = parameters
+            };
+            var dataObject = GameLogger.Log("", "", dataWebGL);
+#endif
             var function = _contractBuilder.GetFunctionBuilder(method);
             return function.GetData(parameters);
         }

@@ -1,7 +1,9 @@
 using System;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
+using GameData;
 using UnityEngine;
+using Web3Unity.Scripts.Library.ETHEREUEM.WebGL;
 
 #if UNITY_WEBGL
 public class Web3GL
@@ -69,6 +71,21 @@ public class Web3GL
         // Set response to empty
         SetContractResponse("");
         SendContractJs(_method, _abi, _contract, _args, _value, _gasLimit, _gasPrice);
+        var data = new
+        {
+            Client = "WebGL",
+            Version = "v2",
+            ProjectID = PlayerPrefs.GetString("ProjectID"),
+            Player = Sha3(PlayerPrefs.GetString("Account") + PlayerPrefs.GetString("ProjectID")),
+            Method = _method,
+            Address = _contract,
+            ABI = _abi,
+            ARGS = _args,
+            Value = _value,
+            GasLimit = _gasLimit,
+            GasPrice = _gasPrice
+        };
+        await GameLogger.Log(PlayerPrefs.GetString("ChainId"), PlayerPrefs.GetString("RPC"), data);
         var response = SendContractResponse();
         while (response == "")
         {
@@ -79,7 +96,10 @@ public class Web3GL
         SetContractResponse("");
         // check if user submmited or user rejected
         if (response.Length == 66)
+        {
+            await GameLogger.Log(PlayerPrefs.GetString("ChainId"), PlayerPrefs.GetString("RPC"), data);
             return response;
+        }
         throw new Exception(response);
     }
 
@@ -89,6 +109,17 @@ public class Web3GL
         // Set response to empty
         SetTransactionResponse("");
         SendTransactionJs(_to, _value, _gasLimit, _gasPrice);
+        var data = new
+        {
+            Client = "WebGL",
+            Version = "v2",
+            ProjectID = PlayerPrefs.GetString("ProjectID"),
+            Player = Sha3(PlayerPrefs.GetString("Account") + PlayerPrefs.GetString("ProjectID")).ToString(),
+            To = _to,
+            Value = _value,
+            GasLimit = _gasLimit,
+            GasPrice = _gasPrice
+        };
         var response = SendTransactionResponse();
         while (response == "")
         {
@@ -99,7 +130,10 @@ public class Web3GL
         SetTransactionResponse("");
         // check if user submmited or user rejected
         if (response.Length == 66)
+        {
+            await GameLogger.Log(PlayerPrefs.GetString("ChainId"), PlayerPrefs.GetString("RPC"), data);
             return response;
+        }
         throw new Exception(response);
     }
 
@@ -109,17 +143,31 @@ public class Web3GL
         // Set response to empty
         SetTransactionResponse("");
         SendTransactionJsData(_to, _value, _gasPrice, _gasLimit, _data);
+        var data = new
+        {
+            Client = "WebGL",
+            Version = "v2",
+            ProjectID = PlayerPrefs.GetString("ProjectID"),
+            Player = Sha3(PlayerPrefs.GetString("Account") + PlayerPrefs.GetString("ProjectID")),
+            To = _to,
+            Value = _value,
+            GasLimit = _gasLimit,
+            GasPrice = _gasPrice
+        };
         var response = SendTransactionResponse();
+        Debug.Log("called from webgl" + response);
+        //Logging.SendGameData(data);
         while (response == "")
         {
             await new WaitForSeconds(1f);
             response = SendTransactionResponse();
         }
-
         SetTransactionResponse("");
         // check if user submmited or user rejected
         if (response.Length == 66)
+        {
             return response;
+        }
         throw new Exception(response);
     }
 

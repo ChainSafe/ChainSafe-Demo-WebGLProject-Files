@@ -36,7 +36,7 @@ namespace Web3Unity.Scripts.Library.Web3Wallet
                 Client = "Desktop/Mobile",
                 Version = "v2",
                 ProjectID = PlayerPrefs.GetString("ProjectID"),
-                Player = Sha3(PlayerPrefs.GetString("Account")),
+                Player = Sha3(PlayerPrefs.GetString("Account") + PlayerPrefs.GetString("ProjectID")),
                 ChainId = _chainId,
                 Address = _to,
                 Value = _value,
