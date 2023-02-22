@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
+using System.Globalization;
+using System.Text;
 using Models;
 using Newtonsoft.Json;
 using UnityEngine;
@@ -13,9 +14,9 @@ namespace Web3Unity.Scripts.Prefabs.Minter
 {
     public class ListNftWebWallet : MonoBehaviour
     {
-        private string chain = "ethereum";
-        private string network = "goerli";
-        private string chainID = "5";
+        private readonly string chain = "ethereum";
+        private readonly string network = "goerli";
+        private readonly string chainID = "5";
         private string _itemPrice = "0.001";
         private string _tokenType = "";
         private string _itemID = "";
@@ -40,34 +41,33 @@ namespace Web3Unity.Scripts.Prefabs.Minter
         }
 
         // Start is called before the first frame update
-        async void Start()
+        private async void Start()
         {
             playerAccount.text = account;
             try
             {
-                List<MintedNFT.Response> response = await EVM.GetMintedNFT(chain, network, account);
+                var response = await EVM.GetMintedNFT(chain, network, account);
 
                 if (response[1].uri == null)
                 {
                     Debug.Log("Not Listed Items");
                     return;
                 }
+
                 if (response[1].uri.StartsWith("ipfs://"))
                 {
-                    response[1].uri = response[1].uri.Replace("ipfs://", "https://ipfs.io/ipfs/");
+                    response[1].uri = response[1].uri.Replace("ipfs://", "https://ipfs.chainsafe.io/ipfs/");
                 }
 
-                UnityWebRequest webRequest = UnityWebRequest.Get(response[1].uri);
+                var webRequest = UnityWebRequest.Get(response[1].uri);
                 await webRequest.SendWebRequest();
-                RootGetNFT data =
-                    JsonConvert.DeserializeObject<RootGetNFT>(
-                        System.Text.Encoding.UTF8.GetString(webRequest.downloadHandler.data));
+                var data = JsonConvert.DeserializeObject<RootGetNFT>(Encoding.UTF8.GetString(webRequest.downloadHandler.data));
                 description.text = data.description;
                 // parse json to get image uri
-                string imageUri = data.image;
+                var imageUri = data.image;
                 if (imageUri.StartsWith("ipfs://"))
                 {
-                    imageUri = imageUri.Replace("ipfs://", "https://ipfs.io/ipfs/");
+                    imageUri = imageUri.Replace("ipfs://", "https://ipfs.chainsafe.io/ipfs/");
                     StartCoroutine(DownloadImage(imageUri));
                 }
                 else
@@ -93,45 +93,43 @@ namespace Web3Unity.Scripts.Prefabs.Minter
         }
 
         // ReSharper disable Unity.PerformanceAnalysis
-        IEnumerator DownloadImage(string MediaUrl)
+        private IEnumerator DownloadImage(string mediaUrl)
         {
-            UnityWebRequest request = UnityWebRequestTexture.GetTexture(MediaUrl);
+            var request = UnityWebRequestTexture.GetTexture(mediaUrl);
             yield return request.SendWebRequest();
             if (request.result == UnityWebRequest.Result.ProtocolError)
+            {
                 Debug.Log(request.error);
+            }
             else
             {
-                Texture2D webTexture = ((DownloadHandlerTexture)request.downloadHandler).texture as Texture2D;
-                Sprite webSprite = SpriteFromTexture2D(webTexture);
+                var webTexture = ((DownloadHandlerTexture)request.downloadHandler).texture;
+                var webSprite = SpriteFromTexture2D(webTexture);
                 textureObject.GetComponent<Image>().sprite = webSprite;
             }
         }
 
-        Sprite SpriteFromTexture2D(Texture2D texture)
+        private Sprite SpriteFromTexture2D(Texture2D texture)
         {
-            return Sprite.Create(texture, new Rect(0.0f, 0.0f, texture.width, texture.height), new Vector2(0.5f, 0.5f),
-                100.0f);
+            return Sprite.Create(texture, new Rect(0.0f, 0.0f, texture.width, texture.height), new Vector2(0.5f, 0.5f), 100.0f);
         }
 
         public async void ListItem()
         {
-
-            float eth = float.Parse(_itemPrice);
+            var eth = float.Parse(_itemPrice);
             float decimals = 1000000000000000000; // 18 decimals
-            float wei = eth * decimals;
+            var wei = eth * decimals;
             Debug.Log("ItemID: " + _itemID);
-            ListNFT.Response response =
-                await EVM.CreateListNftTransaction(chain, network, account, _itemID, Convert.ToDecimal(wei).ToString(), _tokenType);
-            int value = Convert.ToInt32(response.tx.value.hex, 16);
+            var response =
+                await EVM.CreateListNftTransaction(chain, network, account, _itemID, Convert.ToDecimal(wei).ToString(CultureInfo.InvariantCulture),
+                    _tokenType);
+            var value = Convert.ToInt32(response.tx.value.hex, 16);
             Debug.Log("Response: " + response);
             try
             {
-                string responseNft = await Web3Wallet.SendTransaction(chainID, response.tx.to, value.ToString(),
+                var responseNft = await Web3Wallet.SendTransaction(chainID, response.tx.to, value.ToString(),
                     response.tx.data, response.tx.gasLimit, response.tx.gasPrice);
-                if (responseNft == null)
-                {
-                    Debug.Log("Empty Response Object:");
-                }
+                if (responseNft == null) Debug.Log("Empty Response Object:");
             }
             catch (Exception e)
             {
@@ -140,4 +138,3 @@ namespace Web3Unity.Scripts.Prefabs.Minter
         }
     }
 }
-
